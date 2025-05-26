@@ -1,0 +1,6 @@
+seed: 2024
+device: cuda
+batch_size: 1024
+
+metrics: [recall, ndcg]
+top_ks: [10, 20]

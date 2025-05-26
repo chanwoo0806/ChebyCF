@@ -1,0 +1,11 @@
+seed: 2024
+comment: gfcf_amazon-book
+device: cuda
+batch_size: 1024
+
+dataset: amazon-book
+metrics: [recall, ndcg]
+top_ks: [10, 20]
+
+model: gfcf
+alpha: 0.0

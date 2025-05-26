@@ -1,0 +1,15 @@
+seed: 2024
+comment: chebycf_last-fm
+device: cuda
+batch_size: 1024
+
+dataset: last-fm
+metrics: [recall, ndcg]
+top_ks: [10, 20]
+
+model: chebycf
+K: 8
+phi: 15
+eta: 256
+alpha: 0.1
+beta: 0.2

@@ -1,0 +1,15 @@
+seed: 2024
+comment: chebycf_amazon-book
+device: cuda
+batch_size: 1024
+
+dataset: amazon-book
+metrics: [recall, ndcg]
+top_ks: [10, 20]
+
+model: chebycf
+K: 8
+phi: 10
+eta: 512
+alpha: 0.2
+beta: 0.0
