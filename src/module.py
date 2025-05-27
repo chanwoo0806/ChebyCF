@@ -9,8 +9,12 @@ from torch import spmm
 def get_norm_inter(inter):
     user_degree = np.array(inter.sum(axis=1)).flatten() # Du
     item_degree = np.array(inter.sum(axis=0)).flatten() # Di
-    user_d_inv_sqrt = sp.diags(np.power(user_degree + 1e-10, -0.5)) # Du^(-0.5)
-    item_d_inv_sqrt = sp.diags(np.power(item_degree + 1e-10, -0.5)) # Di^(-0.5)
+    user_d_inv_sqrt = np.power(user_degree.clip(min=1), -0.5)
+    item_d_inv_sqrt = np.power(item_degree.clip(min=1), -0.5)
+    user_d_inv_sqrt[user_degree == 0] = 0
+    item_d_inv_sqrt[item_degree == 0] = 0
+    user_d_inv_sqrt = sp.diags(user_d_inv_sqrt)  # Du^(-0.5)
+    item_d_inv_sqrt = sp.diags(item_d_inv_sqrt)  # Di^(-0.5)
     norm_inter = (user_d_inv_sqrt @ inter @ item_d_inv_sqrt).tocoo() # Du^(-0.5) * R * Di^(-0.5)
     return norm_inter # R_tilde
 
